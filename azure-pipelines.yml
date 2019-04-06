@@ -53,22 +53,22 @@ jobs:
     steps:
       - task: DownloadSecureFile@1
         inputs:
-          secureFile: secring.gpg.enc
-      - task: DecryptFile@1
-        inputs:
-          cipher: 'aes-256-cbc'
-          inFile: $(GPG_DIR)/secring.gpg.enc
-          passphrase: $(ENCRYPTION_PASSWORD)
-          outFile: $(GPG_DIR)/secring.gpg
+          secureFile: secring.gpg
+#      - task: DecryptFile@1
+#        inputs:
+#          cipher: 'aes-256-cbc'
+#          inFile: $(GPG_DIR)/secring.gpg.enc
+#          passphrase: $(ENCRYPTION_PASSWORD)
+#          outFile: $(GPG_DIR)/secring.gpg
       - task: DownloadSecureFile@1
         inputs:
-          secureFile: pubring.gpg.enc
-      - task: DecryptFile@1
-        inputs:
-          cipher: 'aes-256-cbc'
-          inFile: $(GPG_DIR)/pubring.gpg.enc
-          passphrase: $(ENCRYPTION_PASSWORD)
-          outFile: $(GPG_DIR)/pubring.gpg
+          secureFile: pubring.gpg
+#      - task: DecryptFile@1
+#        inputs:
+#          cipher: 'aes-256-cbc'
+#          inFile: $(GPG_DIR)/pubring.gpg.enc
+#          passphrase: $(ENCRYPTION_PASSWORD)
+#          outFile: $(GPG_DIR)/pubring.gpg
 #      - script: gpg --import $(GPG_DIR)/secring.gpg && gpg --import $(GPG_DIR)/pubring.gpg  && gpg --list-keys
       - task: Maven@3
         inputs:
