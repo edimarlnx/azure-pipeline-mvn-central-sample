@@ -27,6 +27,8 @@ jobs:
 #          artifactName: target
 
   - job: Deploy
+    variables:
+      - group: Deploy-keys
     pool:
       vmImage: 'ubuntu-16.04'
     steps:
