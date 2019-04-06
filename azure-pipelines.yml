@@ -49,6 +49,7 @@ jobs:
       matrix:
         ubuntu18:
           containerResource: u18
+    container: $[ variables['containerResource'] ]
     steps:
       - script: gpg --version
       - task: DownloadSecureFile@1
