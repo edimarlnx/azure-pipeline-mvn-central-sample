@@ -4,48 +4,67 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
+  - master
 
 jobs:
-- job: Build
-  pool:
-    vmImage: 'ubuntu-16.04'
-  steps:
-  - task: Maven@3
-    inputs:
-      mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx1024m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: false
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      goals: 'clean package'
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(System.DefaultWorkingDirectory)'
-      artifactName: target
+  - job: Build
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'pom.xml'
+          mavenOptions: '-Xmx1024m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          goals: 'clean package'
+#      - task: PublishBuildArtifacts@1
+#        inputs:
+#          pathtoPublish: '$(System.DefaultWorkingDirectory)'
+#          artifactName: target
 
-- job: Deploy
-  pool:
-    vmImage: 'ubuntu-16.04'
-  steps:
-  - checkout: none #skip checking out the default repository resource
-  - task: Maven@3
-    inputs:
-      mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx1024m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: false
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      goals: 'test'
-  - task: DownloadBuildArtifacts@0
-    displayName: 'Download Build Artifacts'
-    inputs:
-      pathtoPublish: '$(System.DefaultWorkingDirectory)'
-      artifactName: target
-  dependsOn: Build
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/releases/rc'))
+  - job: Deploy
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:
+      - checkout: none #skip checking out the default repository resource
+      - script: export GPG_DIR=$(Agent.TempDirectory)
+      - task: DownloadSecureFile@1
+        inputs:
+          secureFile: secring.gpg.enc
+      - task: DecryptFile@1
+        inputs:
+          #cipher: 'des3'
+          inFile: $GPG_DIR/secring.gpg.enc
+          passphrase: $ENCRYPTION_PASSWORD
+          outFile: $GPG_DIR/secring.gpg
+      - task: DownloadSecureFile@1
+        inputs:
+          secureFile: pubring.gpg.enc
+      - task: DecryptFile@1
+        inputs:
+          #cipher: 'des3'
+          inFile: $GPG_DIR/pubring.gpg.enc
+          passphrase: $ENCRYPTION_PASSWORD
+          outFile: $GPG_DIR/pubring.gpg
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'pom.xml'
+          mavenOptions: '-Xmx1024m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          goals: 'deploy -B'
+#      - task: DownloadBuildArtifacts@0
+#        displayName: 'Download Build Artifacts'
+#        inputs:
+#          pathtoPublish: '$(System.DefaultWorkingDirectory)'
+#          artifactName: target
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/releases/rc'))
 
