@@ -65,10 +65,9 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          goals: |
-            -B deploy -Dmaven.test.skip=true -Dfindbugs.skip=true -DperformRelease=true --settings deployment/settings.xml \
-            -Dgpg.keyname=$(GPG_KEYNAME) -Dgpg.passphrase=$(GPG_PASSPHRASE) -Dgpg.publicKeyring=$(GPG_DIR)/pubring.gpg -Dgpg.secretKeyring=$(GPG_DIR)/secring.gpg \
-            -Dsonatype-username=$(SONATYPE_USERNAME) -Dsonatype-password=$(SONATYPE_PASSWORD)
+          goals: 'deploy -B -Dmaven.test.skip=true -Dfindbugs.skip=true -DperformRelease=true --settings deployment/settings.xml
+            -Dgpg.keyname=$(GPG_KEYNAME) -Dgpg.passphrase=$(GPG_PASSPHRASE) -Dgpg.publicKeyring=$(GPG_DIR)/pubring.gpg -Dgpg.secretKeyring=$(GPG_DIR)/secring.gpg
+            -Dsonatype-username=$(SONATYPE_USERNAME) -Dsonatype-password=$(SONATYPE_PASSWORD)'
 #      - task: DownloadBuildArtifacts@0
 #        displayName: 'Download Build Artifacts'
 #        inputs:
