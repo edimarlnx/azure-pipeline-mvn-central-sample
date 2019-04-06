@@ -121,8 +121,8 @@
         <profile>
             <id>sonatype-nexus</id>
             <properties>
-<!--                <gpg.executable>gpg</gpg.executable>-->
-<!--                <gpg.defaultKeyring>false</gpg.defaultKeyring>-->
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.defaultKeyring>false</gpg.defaultKeyring>
 <!--                <gpg.keyname>$(GPG_KEYNAME)</gpg.keyname>-->
 <!--                <gpg.passphrase>$(GPG_PASSPHRASE)</gpg.passphrase>-->
 <!--                <gpg.publicKeyring>${gpg.dir}/pubring.gpg</gpg.publicKeyring>-->
