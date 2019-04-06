@@ -31,7 +31,8 @@ jobs:
   - job: Deploy
     variables:
       - group: Deploy-keys
-      - GPG_DIR: $(Agent.TempDirectory)
+      - name: GPG_DIR
+        value: $(Agent.TempDirectory)
     pool:
       vmImage: 'ubuntu-16.04'
     steps:
