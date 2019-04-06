@@ -71,5 +71,5 @@ jobs:
 #          pathtoPublish: '$(System.DefaultWorkingDirectory)'
 #          artifactName: target
     dependsOn: Build
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/releases/rc'))
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/releases/rc')
 
