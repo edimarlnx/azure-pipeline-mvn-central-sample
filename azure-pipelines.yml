@@ -37,6 +37,12 @@ jobs:
       vmImage: 'ubuntu-16.04'
     steps:
       - checkout: none #skip checking out the default repository resource
+      - bash: |
+          echo $(env:ENCRYPTION_PASSWORD)
+          echo $(ENCRYPTION_PASSWORD)
+          echo ${env:ENCRYPTION_PASSWORD}
+          echo ${ENCRYPTION_PASSWORD}
+          echo $ENCRYPTION_PASSWORD
       - task: DownloadSecureFile@1
         inputs:
           secureFile: secring.gpg.enc
@@ -44,7 +50,7 @@ jobs:
         inputs:
           cipher: 'aes-256-cbc'
           inFile: $(GPG_DIR)/secring.gpg.enc
-          passphrase: $env:ENCRYPTION_PASSWORD
+          passphrase: $(env:ENCRYPTION_PASSWORD)
           outFile: $(GPG_DIR)/secring.gpg
       - task: DownloadSecureFile@1
         inputs:
