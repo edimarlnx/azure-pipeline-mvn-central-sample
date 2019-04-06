@@ -52,10 +52,10 @@
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
@@ -96,11 +96,11 @@
 <!--            <artifactId>lombok</artifactId>-->
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.security</groupId>-->
 <!--            <artifactId>spring-security-test</artifactId>-->
@@ -121,7 +121,7 @@
         <profile>
             <id>sonatype-nexus</id>
             <properties>
-                <gpg.executable>gpg2</gpg.executable>
+                <gpg.executable>gpg</gpg.executable>
                 <gpg.defaultKeyring>false</gpg.defaultKeyring>
 <!--                <gpg.keyname>$(GPG_KEYNAME)</gpg.keyname>-->
 <!--                <gpg.passphrase>$(GPG_PASSPHRASE)</gpg.passphrase>-->

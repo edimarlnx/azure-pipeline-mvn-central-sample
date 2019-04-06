@@ -36,8 +36,7 @@ jobs:
     pool:
       vmImage: 'ubuntu-16.04'
     steps:
-      - bash: |
-          echo $(ENCRYPTION_PASSWORD)
+      - script: gpg --version
       - task: DownloadSecureFile@1
         inputs:
           secureFile: secring.gpg.enc
