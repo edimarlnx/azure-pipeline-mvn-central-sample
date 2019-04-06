@@ -10,7 +10,7 @@ trigger:
 resources:
   containers:
     - container: u18
-      image: edimarlnx/maven3-jdk11-gpg2:latest
+      image: edimarlnx/maven3-jdk-11-gpg2
 
 jobs:
   - job: Build
