@@ -43,18 +43,18 @@ jobs:
       - task: DecryptFile@1
         inputs:
           cipher: 'aes-256-cbc'
-          inFile: $GPG_DIR/secring.gpg.enc
-          passphrase: $ENV:ENCRYPTION_PASSWORD
-          outFile: $GPG_DIR/secring.gpg
+          inFile: $(GPG_DIR)/secring.gpg.enc
+          passphrase: $env:ENCRYPTION_PASSWORD
+          outFile: $(GPG_DIR)/secring.gpg
       - task: DownloadSecureFile@1
         inputs:
           secureFile: pubring.gpg.enc
       - task: DecryptFile@1
         inputs:
           cipher: 'aes-256-cbc'
-          inFile: $GPG_DIR/pubring.gpg.enc
-          passphrase: $ENCRYPTION_PASSWORD
-          outFile: $GPG_DIR/pubring.gpg
+          inFile: $(GPG_DIR)/pubring.gpg.enc
+          passphrase: $env:ENCRYPTION_PASSWORD
+          outFile: $(GPG_DIR)/pubring.gpg
       - task: Maven@3
         inputs:
           mavenPomFile: 'pom.xml'
