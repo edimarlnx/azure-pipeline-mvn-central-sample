@@ -65,7 +65,7 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          goals: 'deploy -B'
+          goals: '-B deploy -Dmaven.test.skip=true -Dfindbugs.skip=true --settings deployment/settings.xml'
 #      - task: DownloadBuildArtifacts@0
 #        displayName: 'Download Build Artifacts'
 #        inputs:
