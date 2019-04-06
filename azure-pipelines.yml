@@ -7,10 +7,20 @@ trigger:
   - master
   - releases/rc
 
+resources:
+  containers:
+    - container: u18
+      image: ubuntu:18.04
+
 jobs:
   - job: Build
     pool:
       vmImage: 'ubuntu-16.04'
+    strategy:
+      matrix:
+        ubuntu18:
+          containerResource: u18
+    container: $[ variables['containerResource'] ]
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     steps:
       - task: Maven@3
@@ -35,6 +45,10 @@ jobs:
         value: $(Agent.TempDirectory)
     pool:
       vmImage: 'ubuntu-16.04'
+    strategy:
+      matrix:
+        ubuntu18:
+          containerResource: u18
     steps:
       - script: gpg --version
       - task: DownloadSecureFile@1
