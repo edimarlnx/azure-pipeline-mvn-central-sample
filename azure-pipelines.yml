@@ -70,18 +70,17 @@ jobs:
 #          passphrase: $(ENCRYPTION_PASSWORD)
 #          outFile: $(GPG_DIR)/pubring.gpg
       - bash: gpg --batch --import $(GPG_DIR)/secring.gpg && gpg --list-keys
-#      - task: Maven@3
-#        inputs:
-#          mavenPomFile: 'pom.xml'
-#          mavenOptions: '-Xmx1024m'
-#          javaHomeOption: 'JDKVersion'
-#          jdkVersionOption: '1.11'
-#          jdkArchitectureOption: 'x64'
-#          publishJUnitResults: false
-#          testResultsFiles: '**/surefire-reports/TEST-*.xml'
-#          goals: 'deploy -B -Dmaven.repo.local=/mvn2m/.m2/repository -Dmaven.test.skip=true -Dfindbugs.skip=true -DperformRelease=true --settings deployment/settings.xml
-#            -Dgpg.keyname=$(GPG_KEYNAME) -Dgpg.passphrase=$(GPG_PASSPHRASE) -Dgpg.publicKeyring=$(GPG_DIR)/pubring.gpg -Dgpg.secretKeyring=$(GPG_DIR)/secring.gpg
-#            -Dsonatype-username=$(SONATYPE_USERNAME) -Dsonatype-password=$(SONATYPE_PASSWORD)'
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'pom.xml'
+          mavenOptions: '-Xmx1024m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          goals: 'deploy -B -Dmaven.repo.local=/mvn2m/.m2/repository -Dmaven.test.skip=true -Dfindbugs.skip=true -DperformRelease=true --settings deployment/settings.xml
+            -Dgpg.keyname=$(GPG_KEYNAME) -Dgpg.passphrase=$(GPG_PASSPHRASE) -Dsonatype-username=$(SONATYPE_USERNAME) -Dsonatype-password=$(SONATYPE_PASSWORD)'
 #      - task: DownloadBuildArtifacts@0
 #        displayName: 'Download Build Artifacts'
 #        inputs:
