@@ -69,8 +69,7 @@ jobs:
 #          inFile: $(GPG_DIR)/pubring.gpg.enc
 #          passphrase: $(ENCRYPTION_PASSWORD)
 #          outFile: $(GPG_DIR)/pubring.gpg
-      - bash: |
-        export GPG_TTY=$(tty) && gpg --import $(GPG_DIR)/secring.gpg && gpg --list-keys
+      - bash: export GPG_TTY=$(tty) && gpg --import $(GPG_DIR)/secring.gpg && gpg --list-keys
 #      - task: Maven@3
 #        inputs:
 #          mavenPomFile: 'pom.xml'
