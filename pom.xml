@@ -123,10 +123,10 @@
             <properties>
                 <gpg.executable>gpg</gpg.executable>
                 <gpg.defaultKeyring>false</gpg.defaultKeyring>
-<!--                <gpg.keyname>$(GPG_KEYNAME)</gpg.keyname>-->
-<!--                <gpg.passphrase>$(GPG_PASSPHRASE)</gpg.passphrase>-->
-<!--                <gpg.publicKeyring>${gpg.dir}/pubring.gpg</gpg.publicKeyring>-->
-<!--                <gpg.secretKeyring>$(gpg.dir)/secring.gpg</gpg.secretKeyring>-->
+<!--                <gpg.keyname>${GPG_KEYNAME}</gpg.keyname>-->
+<!--                <gpg.passphrase>${GPG_PASSPHRASE}</gpg.passphrase>-->
+                <!--                <gpg.publicKeyring>${gpg.dir}/pubring.gpg</gpg.publicKeyring>-->
+                <!--                <gpg.secretKeyring>$(gpg.dir)/secring.gpg</gpg.secretKeyring>-->
             </properties>
             <activation>
                 <property>
@@ -146,7 +146,14 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
+
                         </executions>
                     </plugin>
                     <plugin>
