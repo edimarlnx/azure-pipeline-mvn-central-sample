@@ -79,7 +79,7 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          goals: 'deploy -B -Dmaven.repo.local=/mvn2m/.m2/repository -Dmaven.test.skip=true -Dfindbugs.skip=true -DperformRelease=true --settings deployment/settings.xml \
+          goals: 'deploy -B -Dmaven.repo.local=/mvn2m/.m2/repository -Dmaven.test.skip=true -Dfindbugs.skip=true -DperformRelease=true --settings deployment/settings.xml
             -Dgpg.keyname=$(GPG_KEYNAME) -Dgpg.passphrase=$(GPG_PASSPHRASE) -Dsonatype-username=$(SONATYPE_USERNAME) -Dsonatype-password=$(SONATYPE_PASSWORD)'
 #      - task: DownloadBuildArtifacts@0
 #        displayName: 'Download Build Artifacts'
