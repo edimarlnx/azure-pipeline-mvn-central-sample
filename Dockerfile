@@ -3,7 +3,6 @@ FROM maven:3-jdk-11-slim
 ENV DEBIAN_FRONTEND=noninteractive
 ENV JAVA_HOME_11_X64=${JAVA_HOME}
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
-VOLUME /mvn2m
 
 WORKDIR /temp_pom
 COPY pom.xml .
@@ -19,8 +18,9 @@ RUN apt-get update \
         libicu57 \
         gnupg2 && apt-get clean
 
-RUN mkdir -p /mvn2m/.m2/repository && mvn dependency:resolve -Dmaven.repo.local=/mvn2m/.m2/repository && \
+RUN mkdir -p /mvn2m/.m2/repository && mvn dependency:resolve && \
         rm -rf /temp_pom && \
+        mv /root/.m2/repository /mvn2m/.m2/ && \
         chmod -R 777 /mvn2m
 
 WORKDIR /azp
