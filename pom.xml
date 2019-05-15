@@ -146,11 +146,11 @@
             <id>sonatype-nexus</id>
             <properties>
                 <gpg.executable>gpg2</gpg.executable>
-                <gpg.defaultKeyring>true</gpg.defaultKeyring>
-                <!--                <gpg.keyname>${GPG_KEYNAME}</gpg.keyname>-->
-                <!--                <gpg.passphrase>${GPG_PASSPHRASE}</gpg.passphrase>-->
-                <!--                                <gpg.publicKeyring>${gpg.dir}/pubring.gpg</gpg.publicKeyring>-->
-                <!--                                <gpg.secretKeyring>$(gpg.dir)/secring.gpg</gpg.secretKeyring>-->
+                <gpg.defaultKeyring>false</gpg.defaultKeyring>
+                                <gpg.keyname>${GPG_KEYNAME}</gpg.keyname>
+                                <gpg.passphrase>${GPG_PASSPHRASE}</gpg.passphrase>
+                                                <gpg.publicKeyring>${gpg.dir}/pubring.gpg</gpg.publicKeyring>
+                                                <gpg.secretKeyring>${gpg.dir}/secring.gpg</gpg.secretKeyring>
             </properties>
             <activation>
                 <property>
@@ -171,10 +171,10 @@
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
-                                    <gpgArguments>
-                                        <arg>--pinentry-mode</arg>
-                                        <arg>loopback</arg>
-                                    </gpgArguments>
+<!--                                    <gpgArguments>-->
+<!--                                        <arg>&#45;&#45;pinentry-mode</arg>-->
+<!--                                        <arg>loopback</arg>-->
+<!--                                    </gpgArguments>-->
                                 </configuration>
                             </execution>
 
